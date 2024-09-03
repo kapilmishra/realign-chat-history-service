@@ -53,4 +53,3 @@ The project uses Poetry for dependency management. Dependencies are defined in `
 
 ```sh
 poetry install
-ble by separating concerns into distinct layers.
