@@ -1,0 +1,16 @@
+version: "3.2"
+services:
+  service:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./
+    env_file:
+      - ./src/.env
+    container_name: realign-chat-history
+    command: fastapi dev src/main.py --host 0.0.0.0
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src/
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

@@ -1,0 +1,2 @@
+FastAPI Clean Architecture Example
+This project is an example of how to structure a FastAPI application following the principles of Clean Architecture (also known as Hexagonal Architecture). The goal is to keep the codebase maintainable, testable, and scalable by separating concerns into distinct layers.

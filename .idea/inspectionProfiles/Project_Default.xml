@@ -1,0 +1,24 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="11">
+            <item index="0" class="java.lang.String" itemvalue="unstructured-inference" />
+            <item index="1" class="java.lang.String" itemvalue="openai" />
+            <item index="2" class="java.lang.String" itemvalue="pdfminer.six" />
+            <item index="3" class="java.lang.String" itemvalue="pdf2image" />
+            <item index="4" class="java.lang.String" itemvalue="opencv-python" />
+            <item index="5" class="java.lang.String" itemvalue="pikepdf" />
+            <item index="6" class="java.lang.String" itemvalue="streamlit_chat" />
+            <item index="7" class="java.lang.String" itemvalue="streamlit" />
+            <item index="8" class="java.lang.String" itemvalue="unstructured-pytesseract" />
+            <item index="9" class="java.lang.String" itemvalue="langchain_openai" />
+            <item index="10" class="java.lang.String" itemvalue="hydralit-components" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

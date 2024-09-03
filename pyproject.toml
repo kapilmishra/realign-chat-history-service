@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "realign-chat-history-service"
+version = "0.1.0"
+description = ""
+authors = ["Kapil Mishra <kapil.mishra@esuccess.in>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["all"], version = "^0.112.2"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.packages]
+# Define where Poetry should look for packages
+include = [{ include = "src" }]
