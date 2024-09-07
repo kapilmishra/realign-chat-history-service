@@ -22,6 +22,10 @@ class MessageRepository(ABC):
     def get_message(self, message_id: uuid) -> Optional[Message]:
         pass
 
+    @abstractmethod
+    def get_message_list(self) -> List[Message]:
+        pass
+
 
 class ConversationRepository(ABC):
     @abstractmethod
@@ -29,7 +33,9 @@ class ConversationRepository(ABC):
         pass
 
     @abstractmethod
-    def update_conversation(self, conversation_id: uuid, title: str) -> Optional[Conversation]:
+    def update_conversation(
+        self, conversation_id: uuid, title: str
+    ) -> Optional[Conversation]:
         pass
 
     @abstractmethod
@@ -41,5 +47,11 @@ class ConversationRepository(ABC):
         pass
 
     @abstractmethod
-    def append_message(self, conversation_id: uuid, message: Message) -> Optional[Conversation]:
+    def get_conversation_list(self) -> List[Conversation]:
+        pass
+
+    @abstractmethod
+    def append_message(
+        self, conversation_id: uuid, message: Message
+    ) -> Optional[Conversation]:
         pass

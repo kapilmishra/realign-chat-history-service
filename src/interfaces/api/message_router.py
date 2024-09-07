@@ -1,7 +1,9 @@
+from typing import List
 from uuid import UUID
 
 from fastapi import APIRouter, Depends
 from ...application.use_cases.create_message import CreateMessageUseCase
+from ...application.use_cases.list_messages import ListMessageUseCase
 from ...application.use_cases.update_message import UpdateMessageUseCase
 from ...application.use_cases.delete_message import DeleteMessageUseCase
 from ...application.use_cases.read_message import ReadMessageUseCase
@@ -36,11 +38,20 @@ def get_read_message_use_case(repo=Depends(get_message_repository)):
     return ReadMessageUseCase(repo)
 
 
+def get_list_message_use_case(repo=Depends(get_message_repository)):
+    return ListMessageUseCase(repo)
+
+
 @message_router.post("/", response_model=Message)
 def create_message(
     content: str, use_case: CreateMessageUseCase = Depends(get_create_message_use_case)
 ):
     return use_case.execute(content)
+
+
+@message_router.post("/list", response_model=List[Message])
+def list_message(use_case: ListMessageUseCase = Depends(get_list_message_use_case)):
+    return use_case.execute()
 
 
 @message_router.put("/{message_id}", response_model=Message)

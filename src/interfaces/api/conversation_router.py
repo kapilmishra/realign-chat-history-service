@@ -1,7 +1,9 @@
+from typing import List
 from uuid import UUID
 
 from fastapi import APIRouter, Depends
 from ...application.use_cases.create_conversation import CreateConversationUseCase
+from ...application.use_cases.list_conversation import ListConversationUseCase
 from ...application.use_cases.update_conversation import UpdateConversationUseCase
 from ...application.use_cases.delete_conversation import DeleteConversationUseCase
 from ...application.use_cases.read_conversation import ReadConversationUseCase
@@ -49,6 +51,12 @@ def get_read_conversation_use_case(
     return ReadConversationUseCase(repo)
 
 
+def get_list_conversation_use_case(
+    repo: InMemoryConversationRepository = Depends(get_conversation_repository),
+):
+    return ListConversationUseCase(repo)
+
+
 def get_append_message_use_case(
     conversation_repo: InMemoryConversationRepository = Depends(
         get_conversation_repository
@@ -92,6 +100,13 @@ def read_conversation(
     use_case: ReadConversationUseCase = Depends(get_read_conversation_use_case),
 ):
     return use_case.execute(conversation_id)
+
+
+@conversation_router.get("/list", response_model=List[Conversation])
+def list_conversation(
+    use_case: ListConversationUseCase = Depends(get_list_conversation_use_case),
+):
+    return use_case.execute()
 
 
 @conversation_router.post(
