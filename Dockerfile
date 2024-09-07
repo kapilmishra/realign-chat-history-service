@@ -28,16 +28,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PATH="/app/.venv/bin:$PATH"
 
-RUN useradd -m userbackend
-
 WORKDIR /app
 
 # copy the venv folder from builder image
 COPY --from=builder /app/.venv ./.venv
-
-RUN chown -R userbackend:userbackend /app
-
-USER userbackend
 
 COPY src ./src
 
