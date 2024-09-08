@@ -9,5 +9,4 @@ class ListConversationUseCase:
         self.repository = repository
 
     def execute(self) -> list[Conversation]:
-        # Fetch the conversation by its ID
         return self.repository.get_conversation_list()

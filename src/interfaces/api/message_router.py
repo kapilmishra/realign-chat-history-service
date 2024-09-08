@@ -1,22 +1,24 @@
-from typing import List
+from functools import lru_cache
+from typing import List, Optional
 from uuid import UUID
 
 from fastapi import APIRouter, Depends
+
 from ...application.use_cases.create_message import CreateMessageUseCase
-from ...application.use_cases.list_messages import ListMessageUseCase
-from ...application.use_cases.update_message import UpdateMessageUseCase
 from ...application.use_cases.delete_message import DeleteMessageUseCase
+from ...application.use_cases.list_messages import ListMessageUseCase
 from ...application.use_cases.read_message import ReadMessageUseCase
+from ...application.use_cases.update_message import UpdateMessageUseCase
 from ...domain.entities import Message
 from ...infrastructure.repositories.in_memory_repository import (
     InMemoryMessageRepository,
 )
 
-
 message_router = APIRouter()
 
 
 # Create repository as a singleton dependency
+@lru_cache
 def get_message_repository():
     return InMemoryMessageRepository()
 
@@ -49,7 +51,7 @@ def create_message(
     return use_case.execute(content)
 
 
-@message_router.post("/list", response_model=List[Message])
+@message_router.get("/list", response_model=List[Message])
 def list_message(use_case: ListMessageUseCase = Depends(get_list_message_use_case)):
     return use_case.execute()
 
@@ -71,7 +73,7 @@ def delete_message(
     return use_case.execute(message_id)
 
 
-@message_router.get("/{message_id}", response_model=Message)
+@message_router.get("/{message_id}", response_model=Optional[Message])
 def get_message(
     message_id: UUID, use_case: ReadMessageUseCase = Depends(get_read_message_use_case)
 ):

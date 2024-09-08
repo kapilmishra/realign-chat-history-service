@@ -1,3 +1,4 @@
+from functools import lru_cache
 from typing import List
 from uuid import UUID
 
@@ -18,6 +19,7 @@ conversation_router = APIRouter()
 
 
 # Create repository as a singleton dependency
+@lru_cache
 def get_conversation_repository():
     return InMemoryConversationRepository()
 

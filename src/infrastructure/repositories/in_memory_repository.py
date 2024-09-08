@@ -28,7 +28,7 @@ class InMemoryMessageRepository(MessageRepository):
         return self.messages.get(message_id)
 
     def get_message_list(self) -> List[Message]:
-        return self.messages.values()
+        return list(self.messages.values())
 
 
 class InMemoryConversationRepository(ConversationRepository):
@@ -56,7 +56,8 @@ class InMemoryConversationRepository(ConversationRepository):
         return self.conversations.get(conversation_id)
 
     def get_conversation_list(self) -> List[Conversation]:
-        return self.conversations.values()
+        print(self.conversations.values())
+        return list(self.conversations.values())
 
     def append_message(
         self, conversation_id: uuid.UUID, message: Message

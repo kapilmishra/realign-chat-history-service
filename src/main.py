@@ -1,3 +1,5 @@
+import logging
+import sys
 import time
 
 from fastapi import FastAPI, Request
@@ -9,8 +11,14 @@ app = FastAPI()
 app.include_router(
     message_router,
     prefix="/messages",
+    tags=["Message"]
 )
-app.include_router(conversation_router, prefix="/conversations")
+
+app.include_router(
+    conversation_router,
+    prefix="/conversations",
+    tags=["Conversation"]
+)
 
 
 @app.middleware("http")
@@ -20,3 +28,12 @@ async def add_process_time_header(request: Request, call_next):
     process_time = time.perf_counter() - start_time
     response.headers["X-Process-Time"] = str(process_time)
     return response
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+stream_handler = logging.StreamHandler(sys.stdout)
+log_formatter = logging.Formatter("%(asctime)s [%(processName)s: %(process)d] [%(threadName)s: %(thread)d] [%(levelname)s] %(name)s: %(message)s")
+stream_handler.setFormatter(log_formatter)
+logger.addHandler(stream_handler)
+
+logger.info('API is starting up')
