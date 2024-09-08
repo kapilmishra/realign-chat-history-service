@@ -1,5 +1,5 @@
 from functools import lru_cache
-from typing import List
+from typing import List, Optional
 from uuid import UUID
 
 from fastapi import APIRouter, Depends
@@ -94,7 +94,7 @@ def delete_conversation(
     return use_case.execute(conversation_id)
 
 
-@conversation_router.get("/{conversation_id}", response_model=Conversation)
+@conversation_router.get("/{conversation_id}", response_model=Optional[Conversation])
 def read_conversation(
         conversation_id: UUID,
         use_case: ReadConversationUseCase = Depends(get_read_conversation_use_case),
@@ -104,13 +104,12 @@ def read_conversation(
 
 @conversation_router.get("/list", response_model=List[Conversation])
 def list_conversation(
-        use_case: ListConversationUseCase = Depends(get_list_conversation_use_case),
-):
+        use_case: ListConversationUseCase = Depends(get_list_conversation_use_case)):
     return use_case.execute()
 
 
 @conversation_router.post(
-    "/{conversation_id}/append-message", response_model=Conversation
+    "/{conversation_id}/append-message", response_model=Optional[Conversation]
 )
 def append_message_to_conversation(
         conversation_id: UUID,

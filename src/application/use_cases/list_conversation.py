@@ -8,5 +8,5 @@ class ListConversationUseCase:
     def __init__(self, repository: ConversationRepository):
         self.repository = repository
 
-    def execute(self) -> list[Conversation]:
+    def execute(self) -> List[Conversation]:
         return self.repository.get_conversation_list()

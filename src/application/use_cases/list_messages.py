@@ -10,5 +10,5 @@ class ListMessageUseCase:
     def __init__(self, repository: MessageRepository):
         self.repository = repository
 
-    def execute(self) -> list[Message]:
+    def execute(self) -> List[Message]:
         return self.repository.get_message_list()
