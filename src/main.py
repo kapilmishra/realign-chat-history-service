@@ -10,13 +10,13 @@ app = FastAPI()
 
 app.include_router(
     message_router,
-    prefix="/messages",
+    prefix="/message",
     tags=["Message"]
 )
 
 app.include_router(
     conversation_router,
-    prefix="/conversations",
+    prefix="/conversation",
     tags=["Conversation"]
 )
 
